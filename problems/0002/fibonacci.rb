@@ -1,4 +1,4 @@
-require 'array'
+require File.dirname(__FILE__) + '/array'
 
 class Fibonacci
   

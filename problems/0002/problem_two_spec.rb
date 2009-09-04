@@ -1,4 +1,4 @@
-require 'problem_two'
+require File.dirname(__FILE__) + '/problem_two'
 
 describe ProblemTwo do
   
