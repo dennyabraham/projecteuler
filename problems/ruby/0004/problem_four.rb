@@ -5,28 +5,24 @@ module ProblemFour
     number.to_s == number.to_s.reverse
   end
 
-  def three_digit_sums
-    Enumerator::Lazy.new do
-      (999...100).each do |jdx|
-        (999...100).each do |idx|
-          yield idx * jdx
+  def self.three_digit_sums
+    Enumerator.new do |y|
+      999.downto(100).each do |jdx|
+        999.downto(100).each do |idx|
+          y << idx * jdx
         end
       end
     end
   end
 
-  def find
-    three_digit_sums.reduce(1) do |max, n|
-      if n < max
+  def self.find_max_palindrome
+    three_digit_sums.reduce(1) do |current, n|
+      if n > current && palindrome?(n)
         n
-      else if palindrome?(n)
-        max
       else
-        n
+        current
       end
     end
   end
 end
-
-
 
