@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 class Array
-  
   def second_to_last
-    return self[size - 2]
+    self[size - 2]
   end
-  
+
   def sum
-    return inject { |acc, elem| acc + elem }
+    inject { |acc, elem| acc + elem }
   end
-  
 end
