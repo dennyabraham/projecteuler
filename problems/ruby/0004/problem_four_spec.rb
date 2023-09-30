@@ -26,4 +26,10 @@ RSpec.describe ProblemFour, :aggregate_failures do
       expect(ProblemFour.three_digit_sums.count).to eq(810_000)
     end
   end
+
+  describe 'the answer' do
+    it "is an answer" do
+      puts "max is #{ProblemFour.find_max_palindrome}"
+    end
+  end
 end
