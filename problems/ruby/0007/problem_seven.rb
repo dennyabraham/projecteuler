@@ -5,8 +5,8 @@ module ProblemSeven
     primes(cache: true).first(n).last
   end
 
-  def self.primes(cache: false)
-    natural_numbers { |n| prime?(n, cache: cache) }
+  def self.primes(cache: false, sequential: false)
+    natural_numbers { |n| prime?(n, cache: cache, sequential: sequential) }
   end
 
   def self.natural_numbers
@@ -16,11 +16,14 @@ module ProblemSeven
     end
   end
 
-  def self.prime?(number, cache: false)
+  def self.prime?(number, cache: false, sequential: false)
     if number <= PRIMES.last
       PRIMES.include?(number)
     elsif PRIMES.any? { |prime| (number % prime).zero? }
       false
+    elsif sequential
+      PRIMES << number if cache
+      true
     else
       prime = !(PRIMES.last...((number / 2).ceil)).any? do |factor|
         (number % factor).zero?
