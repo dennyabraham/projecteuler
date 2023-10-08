@@ -24,4 +24,10 @@ module Problem9
       [a, b_candidates.first]
     end.select { |_, b| !b.nil? }
   end
+
+  def self.product_of_triplet_with_sum(sum)
+    a, b = triplet_with_sum(sum).flatten.uniq
+    c = 1000 - (a + b)
+    a*b*c
+  end
 end
