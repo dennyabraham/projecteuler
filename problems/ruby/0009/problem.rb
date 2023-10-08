@@ -1,4 +1,4 @@
-module Problem
+module Problem9
   # a2 + b2 = c2
   # a + b + c = s
   # c = s - a - b
