@@ -12,6 +12,28 @@ class Problem
       end
     end
 
+    def candidate_lists(k, n)
+      lists = []
+      candidate_list(lists, [], n, (0..(k-1)))
+      lists.map(&:sort).uniq
+    end
+
+    # TODO: tail-recursion
+    # TODO: linearize?
+    # TODO: optimize
+    # TODO: return enumerable
+    def candidate_list(lists, head, max_len, candidate_elems)
+      if head.size + 1 == max_len
+        candidate_elems.each do |elem|
+          lists << head + [elem]
+        end
+      else
+        candidate_elems.each do |elem|
+          candidate_list(lists, head + [elem], max_len, candidate_elems)
+        end
+      end
+    end
+
     def primes(cache: false, sequential: false)
       natural_numbers { |n| prime?(n, cache: cache, sequential: sequential) }
     end

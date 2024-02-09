@@ -18,7 +18,7 @@ describe Problem, :aggregate_failures do
   end
 
   it "generates_lists of combinations" do
-    expect(candidate_lists(2,5)).to contain_exactly(
+    expect(Problem.candidate_lists(2,5)).to contain_exactly(
       [0, 0, 0, 0, 0],
       [0, 0, 0, 0, 1],
       [0, 0, 0, 1, 1],
