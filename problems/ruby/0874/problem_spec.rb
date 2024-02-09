@@ -29,4 +29,14 @@ describe Problem, :aggregate_failures do
 
     # https://www.baeldung.com/cs/generate-k-combinations
   end
+
+  it "finds the maximum divisible prime score" do
+    expect(Problem.maximal_multiple_prime_score(2, 5)).to eq(14)
+  end
+
+  it "finds the max divisible prime score of two high numbers" do
+    prime = Problem.tth_prime(7000)
+
+    puts Problem.maximal_multiple_prime_score(7000, prime)
+  end
 end
