@@ -14,7 +14,7 @@ class Problem
 
     # TODO: optimize
     def maximal_multiple_prime_score(k, n)
-      candidate_lists(k, n).reduce(0) do |max_score, list|
+      candidate_list_lazy(k, n).reduce(0) do |max_score, list|
         if (score = prime_score(list)) > max_score && (score % k == 0)
           score
         else
@@ -41,7 +41,7 @@ class Problem
       end
     end
 
-    def candidate_list_lazy(max_len, base)
+    def candidate_list_lazy(base, max_len)
       Enumerator::Lazy.new((base**max_len).downto(0)) do |yielder, idx|
         list = Array.new(max_len) { 0 }
 
