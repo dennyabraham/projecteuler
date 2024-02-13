@@ -1,9 +1,11 @@
 class Problem
   PRIMES = [2, 3, 5, 7]
-
+  PRIME_SCORES = {}
   class << self
     def tth_prime(n)
-      primes(cache: true).first(n + 1).last
+      return PRIME_SCORES[n] if PRIME_SCORES[n]
+      prime = primes(cache: true).first(n + 1).last
+      PRIME_SCORES[n] = prime
     end
 
     def prime_score(list)
@@ -42,19 +44,31 @@ class Problem
     end
 
     def candidate_list_lazy(base, max_len)
-      Enumerator::Lazy.new((base**max_len).downto(0)) do |yielder, idx|
-        list = Array.new(max_len) { 0 }
-
-        (max_len.downto(0)).each do |position|
-          one = base ** position
-
-          while(idx > one)
-            idx -= one
-            list[max_len - position - 1] += 1
+      # base = 2
+      Enumerator::Lazy.new(base.downto(0)) do |yielder, i|
+        list = Array.new(max_len, i)
+        # for i generate all combos with all numbers after i
+        (1..max_len).each do |position|
+          (base - 1).downto(i + 1) do |num|
+            list[position * -1] = num
+            yielder << list
           end
+          # for each replace all up to position with other
         end
-        yielder << list
       end
+      #Enumerator::Lazy.new((base**max_len).downto(0)) do |yielder, idx|
+      #  list = Array.new(max_len) { 0 }
+
+       # (max_len.downto(0)).each do |position|
+        #  one = base ** position
+
+#          while(idx > one)
+ #           idx -= one
+  #          list[max_len - position - 1] += 1
+   #       end
+    #    end
+     #   yielder << list
+      #end
     end
 
     def primes(cache: false, sequential: false)
