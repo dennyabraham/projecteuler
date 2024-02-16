@@ -3,7 +3,7 @@ class Problem
 
   class << self
     def tth_prime(n)
-      primes(cache: true).first(n + 1).last
+      PRIMES[n] || primes(cache: true).first(n + 1).last
     end
 
     def prime_score(list)
